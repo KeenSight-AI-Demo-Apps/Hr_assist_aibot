@@ -53,14 +53,14 @@ pip install llama-index-llms-ollama llama-index-embeddings-ollama
 **3. Prepare Documents**  
 Put your HR documents (e.g., FAQs, benefit plans) inside the `data/` folder. Start with `hr_benefits.csv`.
 
-**3. Install & Pull Ollama Models**  
+**4. Install & Pull Ollama Models**  
 Install Ollama and pull required models:  
 ```bash
 ollama pull llama3  
 ollama pull mxbai-embed-large  
 ```
 
-**4. Start Docker Containers** 
+**5. Start Docker Containers** 
 📦 Docker Setup
 Make sure Docker is installed and running. 
 ```bash
@@ -71,7 +71,7 @@ This launches:
 - Ollama at `http://localhost:11434`  
 - OpenWebUI at `http://localhost:3000`
 
-**5. (Optional) Rebuild Containers**  
+**6. (Optional) Rebuild Containers**  
 If you change anything in `docker-compose.yml` or `Dockerfile`:  
 ```bash
 docker-compose down -v  
