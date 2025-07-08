@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+  ollama:
+    image: ollama/ollama
+    container_name: hr_assist_ai-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: always
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: hr_assist_ai-open-webui
+    ports:
+      - "3000:8080"
+    environment:
+      - OLLAMA_API_BASE_URL=http://ollama:11434
+      - PIP_PACKAGES=llama-index llama-index-llms-ollama llama-index-embeddings-ollama pandas
+    volumes:
+      - ./backend/plugins:/app/backend/plugins
+      - ./storage:/app/storage
+      - ./data:/app/data
+    depends_on:
+      - ollama
+    restart: always
+
+volumes:
+  ollama_data:
