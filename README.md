@@ -34,7 +34,11 @@ hr_assist_ai/
 ---
 
 ## 🔁 Setup & Installation  
-
+**Download this entire repository** 
+```bash
+git clone https://github.com/KeenSight-AI-Demo-Apps/hr_assist_chatbot.git
+cd<project_folder>
+```
 **1. Clone the Repo**  
 ```bash
 git clone https://github.com/open-webui/open-webui.git
