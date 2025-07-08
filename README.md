@@ -88,7 +88,7 @@ docker-compose up -d --build
 docker exec -it hr_assist_ai-open-webui sh  
 export PYTHONPATH=/app  
 python3  
->>> from backend.plugins.hr_plugin import main  
+>>> from backend.plugins.hr_plugin import main 
 >>> main("What are health benefits?")  
 ```
 
