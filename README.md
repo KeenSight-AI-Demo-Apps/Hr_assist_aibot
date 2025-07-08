@@ -4,21 +4,21 @@ This project is a local-first, privacy-friendly HR chatbot designed to handle em
 ---
 
 ## 📁 Project Structure  
-```
-hr_assist_ai/  
-├── backend/  
-│   ├── plugins/  
-│   │   └── hr_plugin.py         # Core logic for RAG-based Q&A using LlamaIndex + Ollama  
-│   └── custom_apps/  
-│       └── data_loader.py       # Loads CSV documents into vector store  
-├── data/  
-│   └── hr_benefits.csv          # HR Q&A dataset  
-├── storage/                     # Vector index & docstore persisted here  
-├── docker-compose.yml           # Runs Ollama + OpenWebUI  
-├── .env                         # (Optional) Environment variables  
-├── README.md                    # Project documentation  
-```
 
+```
+hr_assist_ai/
+├── backend/
+│   ├── plugins/
+│   │   └── hr_plugin.py           # Main plugin logic (LlamaIndex RAG)
+│   └── custom_apps/
+│       └── data_loader.py         # Used for indexing CSVs or other docs
+├── data/
+│   └── hr_benefits.csv            # Your HR FAQ file (source for chatbot)
+├── storage/                       # Vector store & index persistence
+├── open-webui/                    # Cloned UI interface (via `git clone`)
+├── docker-compose.yml             # Runs OpenWebUI + Ollama containers
+└── README.md                      # This file
+```
 ---
 
 ## 🛠️ Technologies Used  
@@ -37,11 +37,20 @@ hr_assist_ai/
 
 **1. Clone the Repo**  
 ```bash
-git clone https://github.com/yourusername/hr_assist_ai.git  
-cd hr_assist_ai  
+git clone https://github.com/open-webui/open-webui.git
+cd hr_assist_ai
+```
+Make sure open-webui/ folder exists inside hr_assist_ai/.
+
+**2. 🐍 Install Python Dependencies (in .venv)**  
+```bash
+python -m venv .venv
+.venv\Scripts\activate    # Use `source .venv/bin/activate` on Linux/macOS
+pip install llama-index langchain sentence-transformers pandas
+pip install llama-index-llms-ollama llama-index-embeddings-ollama
 ```
 
-**2. Prepare Documents**  
+**3. Prepare Documents**  
 Put your HR documents (e.g., FAQs, benefit plans) inside the `data/` folder. Start with `hr_benefits.csv`.
 
 **3. Install & Pull Ollama Models**  
@@ -51,9 +60,12 @@ ollama pull llama3
 ollama pull mxbai-embed-large  
 ```
 
-**4. Start Docker Containers**  
+**4. Start Docker Containers** 
+📦 Docker Setup
+Make sure Docker is installed and running. 
 ```bash
-docker-compose up -d --build  
+
+docker-compose up -d --build 
 ```  
 This launches:  
 - Ollama at `http://localhost:11434`  
