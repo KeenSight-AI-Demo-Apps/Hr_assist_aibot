@@ -48,6 +48,8 @@ python -m venv .venv
 .venv\Scripts\activate    # Use `source .venv/bin/activate` on Linux/macOS
 pip install llama-index langchain sentence-transformers pandas
 pip install llama-index-llms-ollama llama-index-embeddings-ollama
+# see the in the requirements.txt for more ->
+pip install -r requirements.txt
 ```
 
 **3. Prepare Documents**  
