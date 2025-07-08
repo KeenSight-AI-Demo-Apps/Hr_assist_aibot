@@ -3,6 +3,7 @@ from llama_index.embeddings.ollama import OllamaEmbedding
 from pathlib import Path
 import os
 
+# Set up paths
 DATA_DIR = "data"
 STORAGE_DIR = "storage"
 

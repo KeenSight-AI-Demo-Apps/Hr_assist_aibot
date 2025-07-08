@@ -20,7 +20,7 @@ from llama_index.core import (
 from llama_index.llms.ollama import Ollama
 from llama_index.embeddings.ollama import OllamaEmbedding
 
-# Define paths
+# Define paths for data and storage directories
 DATA_DIR = "/app/data"
 STORAGE_DIR = "/app/storage"
 

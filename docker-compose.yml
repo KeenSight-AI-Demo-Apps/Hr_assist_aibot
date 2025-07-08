@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3.9" # Use a compatible version for your Docker setup
 services:
   ollama:
     image: ollama/ollama
@@ -6,7 +6,7 @@ services:
     ports:
       - "11434:11434"
     volumes:
-      - ollama_data:/root/.ollama
+      - ollama_data:/root/.ollama 
     restart: always
 
   open-webui:
