@@ -1,8 +1,9 @@
+#requirements.txt
+fastapi
 llama-index
 llama-index-llms-ollama
 llama-index-embeddings-ollama
 llama-index 
 llama-index-core 
-llama-index-llms-ollama 
-llama-index-embeddings-ollama
 ollama
+pandas

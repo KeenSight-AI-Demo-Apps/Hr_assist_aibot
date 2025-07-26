@@ -20,18 +20,33 @@ from llama_index.core import (
 from llama_index.llms.ollama import Ollama
 from llama_index.embeddings.ollama import OllamaEmbedding
 
-# Define paths for data and storage directories
+# ------------------- Configuration -------------------
+
+# Set paths for data and storage (mounted into container)
 DATA_DIR = "/app/data"
 STORAGE_DIR = "/app/storage"
 
-# Set Ollama server URL (important: host.docker.internal allows container to reach Ollama on host)
+# Ollama server accessible from within Docker container
 OLLAMA_HOST = "http://ollama:11434"
 
-# Set global model configuration
-Settings.llm = Ollama(model="llama3", base_url=OLLAMA_HOST,request_timeout=60)
-Settings.embed_model = OllamaEmbedding(model_name="mxbai-embed-large", base_url=OLLAMA_HOST, request_timeout=60)
+# ------------------- Model Settings -------------------
 
-# Load or create index
+# Set global models
+Settings.llm = Ollama(
+    model="llama3",
+    base_url=OLLAMA_HOST,
+    request_timeout=300,  # extend timeout to avoid ReadTimeout
+)
+
+Settings.embed_model = OllamaEmbedding(
+    model_name="mxbai-embed-large",
+    base_url=OLLAMA_HOST,
+    request_timeout=160
+)
+
+# ------------------- Index Initialization -------------------
+
+# Check if index already exists
 if os.path.exists(STORAGE_DIR) and os.listdir(STORAGE_DIR):
     storage_context = StorageContext.from_defaults(persist_dir=STORAGE_DIR)
     index = load_index_from_storage(storage_context)
@@ -40,10 +55,14 @@ else:
     index = VectorStoreIndex.from_documents(documents)
     index.storage_context.persist(persist_dir=STORAGE_DIR)
 
-# Create query engine
+# Create query engine once
 query_engine = index.as_query_engine()
 
-# Main function
+# ------------------- Query Function -------------------
+
 def main(query: str) -> str:
-    response = query_engine.query(query)
-    return str(response)
+    try:
+        response = query_engine.query(query)
+        return str(response)
+    except Exception as e:
+        return f"Error during query: {e}"

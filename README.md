@@ -13,7 +13,7 @@ hr_assist_ai/
 │   └── custom_apps/
 │       └── data_loader.py         # Used for indexing CSVs or other docs
 ├── data/
-│   └── hr_benefits.csv            # Your HR FAQ file (source for chatbot)
+│   └── hr_benefits.txt           # Your HR FAQ file (source for chatbot)
 ├── storage/                       # Vector store & index persistence
 ├── open-webui/                    # Cloned UI interface (via `git clone`)
 ├── docker-compose.yml             # Runs OpenWebUI + Ollama containers
